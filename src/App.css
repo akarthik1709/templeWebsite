@@ -211,22 +211,6 @@ a:nth-of-type(0).logo {
     text-align: center;
     justify-content: center;
   }
-  .logo-sharadha {
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    justify-content: center;
-    align-items: center;
-    background-color: #f7f0f085;
-    transition: background-color 300ms ease-in-out;
-  }
-  .logo-sharadha:hover {
-    background-color: #f9f9f9;
-  }
-  .logo-sharadha:active {
-    background-color: #f1f1f1;
-  }
   .dropdown-menu {
     position: relative; /* Change menu position to relative for smaller screens */
   }
