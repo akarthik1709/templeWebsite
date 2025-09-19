@@ -107,6 +107,8 @@ a:nth-of-type(0).logo {
   z-index: 100;
   position: fixed;
   transition: background-color 300ms ease-in-out;
+  position: fixed;
+
 
 }
 .tabs {
@@ -155,7 +157,7 @@ a:nth-of-type(0).logo {
 }
 .pagetitle {
   position: absolute;
-  height: 4em;
+  height: 2.5em;
   padding: 0.5rem;
   display: flex;
   gap: 0.5rem;
