@@ -187,3 +187,28 @@ a:nth-of-type(0).logo {
   }
   
 }
+
+/* Add this media query at the end of the file */
+@media (max-width: 768px) {
+  .tabs-container {
+    right: 1rem;
+    gap: 0.5rem;
+  }
+
+  .logo {
+    height: 10em; /* Reduce logo size on smaller screens */
+  }
+
+  h1 {
+    font-size: 2.5em; /* Adjust title font size */
+  }
+
+  .pagetitle {
+    left: 50%;
+    transform: translateX(-50%);
+    top: 5rem;
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+}
