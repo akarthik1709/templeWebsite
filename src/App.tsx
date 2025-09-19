@@ -9,7 +9,7 @@ function App() {
     <>
     <header className="app-header">
       <div className="logo-sharadha">
-        <img src="src/assets/sharadha.webp" alt="SharadhaPeetham logo" />
+        <img src="/sharadha.webp" alt="SharadhaPeetham logo" />
       </div>
       <div className='pagetitle'>
           <h1>SharadhaPeetham</h1>
@@ -68,7 +68,7 @@ function App() {
     <div className="logo-container">
     </div>
         <div className="logo">
-            <img src="src/assets/sringeri.webp" alt="Sharadhamba logo" />
+            <img src="/sringeri.webp" alt="Sharadhamba logo" />
         </div>
     </>
   )
