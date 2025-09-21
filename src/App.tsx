@@ -6,16 +6,8 @@ export default function App() {
   const [isContactOpen, setContactOpen] = useState(false);
   const aboutRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
-  const array_test = ["src/assets/sringeri.webp", "src/assets/shankara.jpeg"]
 
-  // You do not need state for the initial slide; this should be handled inside the CarouselComponent.
-  const [isInitial, setIsInitial] = useState(true);
-
-  // The logic to set isInitial to false should be handled in a useEffect hook.
   useEffect(() => {
-    // This part is likely not needed if the carousel handles its own state,
-    // but if it's required for the carousel component, this is the correct syntax.
-    // setIsInitial(false);
     
     function handleClickOutside(event: MouseEvent) {
       if (aboutRef.current && !aboutRef.current.contains(event.target as Node)) {
@@ -32,7 +24,6 @@ export default function App() {
     };
   }, [aboutRef, contactRef]);
 
-  // Removed the incorrect useState call. It was a major error.
 
   return (
     <>
