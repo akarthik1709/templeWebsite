@@ -57,8 +57,8 @@ export default function App() {
               </button>
               {isAboutOpen && (
                 <div className="dropdown-menu">
-                  <a href="https://sringeri.net/history" className="dropdown-item">Mutt History</a>
-                  <a href="https://sringeri.net/jagadgurus" className="dropdown-item">Details on Sri Dwithiya Chandrasekara Bharathi Adistana</a>
+                  <a href="/about" className="dropdown-item">Mutt History</a>
+                  <a href="/about" className="dropdown-item">Details on Sri Dwithiya Chandrasekara Bharathi Adistana</a>
                   <a href='/Tkudalu Stala Purana cum appeal- english version_021419.pdf' className="dropdown-item">Sthala Purana</a>
                 </div>
               )}
@@ -84,17 +84,17 @@ export default function App() {
               </button>
               {isEventsOpen && (
                 <div className="dropdown-menu">
-                  <a href="https://sringeri.net/contact" className="dropdown-item">Calendar</a>
-                  <a href="https://sringeri.net/contact" className="dropdown-item">Past Events</a>
-                  <a href="https://sringeri.net/contact" className="dropdown-item">Upcoming Events</a>
-                  <a href="https://sringeri.net/contact" className="dropdown-item">Meetings</a>
-                  <a href="https://sringeri.net/contact" className="dropdown-item">Aksharabhyasa</a>
-                  <a href="https://sringeri.net/contact" className="dropdown-item">Poojas</a>
-                  <a href="https://sringeri.net/contact" className="dropdown-item">Navarathri Pooja</a>
-                  <a href="https://sringeri.net/contact" className="dropdown-item">Shankara Jayanti</a>
-                  <a href="https://sringeri.net/contact" className="dropdown-item">Shankara Aradhane</a>
-                  <a href="https://sringeri.net/contact" className="dropdown-item">Bhajans</a>
-                  <a href="https://sringeri.net/contact" className="dropdown-item">Sri Sri Vidushekara Bharathi's visit to Mutt</a>
+                  <a href="/events/calendar" className="dropdown-item">Calendar</a>
+                  <a href="/events" className="dropdown-item">Past Events</a>
+                  <a href="/events" className="dropdown-item">Upcoming Events</a>
+                  <a href="/events" className="dropdown-item">Meetings</a>
+                  <a href="/events" className="dropdown-item">Aksharabhyasa</a>
+                  <a href="/events" className="dropdown-item">Poojas</a>
+                  <a href="/events" className="dropdown-item">Navarathri Pooja</a>
+                  <a href="/events" className="dropdown-item">Shankara Jayanti</a>
+                  <a href="/events" className="dropdown-item">Shankara Aradhane</a>
+                  <a href="/events" className="dropdown-item">Bhajans</a>
+                  <a href="/events" className="dropdown-item">Sri Sri Vidushekara Bharathi's visit to Mutt</a>
                 </div>
               )}
             </div>

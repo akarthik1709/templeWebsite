@@ -373,3 +373,12 @@
     align-items: center;
     justify-content: center;
   }
+
+/* Styles for FullCalendar event content */
+.fc-event-main {
+  white-space: normal; /* Allow text to wrap */
+  overflow: hidden;    /* Hide overflow */
+  font-size: 0.85em;   /* Adjust font size to fit more text */
+  line-height: 1.3;    /* Adjust line height for wrapped text */
+  color: black;        /* Ensure event text is readable */
+}
