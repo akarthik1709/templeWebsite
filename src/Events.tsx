@@ -1,4 +1,3 @@
-import { useState, useEffect, useRef } from 'react';
 import './Events.css';
 export default function Events() {
   return (
