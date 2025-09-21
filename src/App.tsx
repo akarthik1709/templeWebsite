@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import './App.css';
 import CarouselComponent from './Carousel';
+import { Link , Outlet } from'react-router-dom';
 export default function App() {
   const [isAboutOpen, setAboutOpen] = useState(false);
   const [isContactOpen, setContactOpen] = useState(false);
@@ -84,7 +85,7 @@ export default function App() {
               </button>
               {isEventsOpen && (
                 <div className="dropdown-menu">
-                  <a href="/events/calendar" className="dropdown-item">Calendar</a>
+                  <Link to="/events/calendar" className="dropdown-item">Calendar </Link>
                   <a href="/events" className="dropdown-item">Past Events</a>
                   <a href="/events" className="dropdown-item">Upcoming Events</a>
                   <a href="/events" className="dropdown-item">Meetings</a>
