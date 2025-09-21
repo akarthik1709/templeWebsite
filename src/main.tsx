@@ -4,7 +4,7 @@ import './index.css'
 import App from './App.tsx'
 import About from './About.tsx'
 import FullCalendarComponent from './Calendar'
-import { BrowserRouter as Router, Routes, Route, RouterProvider } from'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from'react-router-dom'
 
 const routes = (
   <Router>

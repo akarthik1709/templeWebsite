@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import './App.css';
 import CarouselComponent from './Carousel';
-import { Link , Outlet } from'react-router-dom';
+import { Link } from'react-router-dom';
 export default function App() {
   const [isAboutOpen, setAboutOpen] = useState(false);
   const [isContactOpen, setContactOpen] = useState(false);
