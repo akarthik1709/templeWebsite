@@ -4,7 +4,7 @@ import "./App.css";
 const images = [
   "/sringeri.webp",
   "/adhistana.jpeg",
-  "/shankaracharya.webp"
+  "/shankaracharya.png"
 ];
 
 function CarouselComponent() {
@@ -42,7 +42,7 @@ function CarouselComponent() {
         style={{
           transform: `translateX(-${currentSlide * (100 / extendedImages.length)}%)`,
           width: `${extendedImages.length * 100}%`,
-          transition: isAnimating ? "transform 0.7s ease-in-out" : "none",
+          transition: isAnimating ? "transform 0.5s ease-in-out" : "none",
         }}
       >
         {extendedImages.map((src, idx) => (
@@ -70,27 +70,6 @@ function CarouselComponent() {
           />
         ))}
       </div>
-
-      <button
-        className="nav-button left"
-        onClick={() => {
-          setIsAnimating(true);
-          setCurrentSlide((prev) =>
-            prev === 0 ? TOTAL_SLIDES - 1 : prev - 1
-          );
-        }}
-      >
-        Prev
-      </button>
-      <button
-        className="nav-button right"
-        onClick={() => {
-          setIsAnimating(true);
-          setCurrentSlide((prev) => prev + 1);
-        }}
-      >
-        Next
-      </button>
     </div>
   );
 }
