@@ -11,7 +11,7 @@ const routes = (
     <Routes>
       <Route path="/" element={<App />} />
       <Route path="/about" element={<About />} />
-      <Route path="/events/calendar" element={<FullCalendarComponent />} />
+      <Route path="/events/calendar" element={<FullCalendarComponent />} />   
     </Routes>
   </Router>
 
