@@ -179,6 +179,13 @@ export default function App() {
     </p>
   </div>
 </div>
+          <div className="audio-container">
+            <h3 className='audio-heading'>Click Here to play Audio</h3>
+            <audio controls>
+              <source src="/tirumakudalu sthala purana-manavi. (1).m4a" type="audio/mp4"/>
+              Your browser does not support the audio element.
+            </audio>
+        </div>
           <div className="map-section">
           <h2 className='map-heading'>Map</h2>
           <div className="map-container">
