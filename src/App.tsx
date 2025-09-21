@@ -4,8 +4,15 @@ import CarouselComponent from './Carousel';
 export default function App() {
   const [isAboutOpen, setAboutOpen] = useState(false);
   const [isContactOpen, setContactOpen] = useState(false);
+  const [isEventsOpen, setEventsOpen] = useState(false);
+  const [isServicesOpen, setServicesOpen] = useState(false);
+  const [isResourcesOpen, setResourcesOpen] = useState(false);
   const aboutRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
+  const eventsRef = useRef<HTMLDivElement>(null);
+  const servicesRef = useRef<HTMLDivElement>(null);
+  const resourcesRef = useRef<HTMLDivElement>(null);
+
 
   useEffect(() => {
     
@@ -13,16 +20,23 @@ export default function App() {
       if (aboutRef.current && !aboutRef.current.contains(event.target as Node)) {
         setAboutOpen(false);
       }
-      if (contactRef.current && !contactRef.current.contains(event.target as Node)) {
+      if (contactRef.current && !contactRef.current.contains(event.target as Node )) {
         setContactOpen(false);
       }
+      if (eventsRef.current && !eventsRef.current.contains(event.target as Node )) {
+        setEventsOpen(false);
+      }
+      if (servicesRef.current && !servicesRef.current.contains(event.target as Node )) {
+        setServicesOpen(false);
+      }
+
     }
 
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [aboutRef, contactRef]);
+  }, [aboutRef, contactRef, eventsRef, servicesRef]);
 
 
   return (
@@ -43,8 +57,9 @@ export default function App() {
               </button>
               {isAboutOpen && (
                 <div className="dropdown-menu">
-                  <a href="https://sringeri.net/history" className="dropdown-item">History</a>
-                  <a href="https://sringeri.net/jagadgurus" className="dropdown-item">Guru Parampara</a>
+                  <a href="https://sringeri.net/history" className="dropdown-item">Mutt History</a>
+                  <a href="https://sringeri.net/jagadgurus" className="dropdown-item">Details on Sri Dwithiya Chandrasekara Bharathi Adistana</a>
+                  <a href='/Tkudalu Stala Purana cum appeal- english version_021419.pdf' className="dropdown-item">Sthala Purana</a>
                 </div>
               )}
             </div>
@@ -63,24 +78,51 @@ export default function App() {
             </div>
           </div>
           <div className="tab">
-            <div className="dropdown">
-              <button className="tabs">
-                Contact
+            <div className="dropdown" ref={eventsRef}>
+              <button onClick={() => setEventsOpen(!isEventsOpen)} className="tabs">
+                Events
               </button>
+              {isEventsOpen && (
+                <div className="dropdown-menu">
+                  <a href="https://sringeri.net/contact" className="dropdown-item">Calendar</a>
+                  <a href="https://sringeri.net/contact" className="dropdown-item">Past Events</a>
+                  <a href="https://sringeri.net/contact" className="dropdown-item">Upcoming Events</a>
+                  <a href="https://sringeri.net/contact" className="dropdown-item">Meetings</a>
+                  <a href="https://sringeri.net/contact" className="dropdown-item">Aksharabhyasa</a>
+                  <a href="https://sringeri.net/contact" className="dropdown-item">Poojas</a>
+                  <a href="https://sringeri.net/contact" className="dropdown-item">Navarathri Pooja</a>
+                  <a href="https://sringeri.net/contact" className="dropdown-item">Shankara Jayanti</a>
+                  <a href="https://sringeri.net/contact" className="dropdown-item">Shankara Aradhane</a>
+                  <a href="https://sringeri.net/contact" className="dropdown-item">Bhajans</a>
+                  <a href="https://sringeri.net/contact" className="dropdown-item">Sri Sri Vidushekara Bharathi's visit to Mutt</a>
+                </div>
+              )}
+            </div>
+          </div>
+          <div className="tab">
+            <div className="dropdown" ref={servicesRef}>
+              <button onClick={()=> setServicesOpen(!isServicesOpen)} className="tabs">
+                Services
+              </button>
+              {isServicesOpen && (
+                <div className="dropdown-menu">
+                  <a href="https://sringeri.net/contact" className="dropdown-item">Online Payment</a>
+                </div>
+              )}
             </div>
           </div>
           <div className="tab">
             <div className="dropdown">
-              <button className="tabs">
-                Contact
+              <button  onClick={()=> setResourcesOpen(!isResourcesOpen)} className="tabs">
+                Resources
               </button>
-            </div>
-          </div>
-          <div className="tab">
-            <div className="dropdown">
-              <button className="tabs">
-                Contact
-              </button>
+              {isResourcesOpen && (
+                <div className="dropdown-menu">
+                  <a href="https://sringeri.net/contact" className="dropdown-item">LN Sastry Book</a>
+                  <a href="https://sringeri.net/contact" className="dropdown-item">Sri Sringeri Vignetts</a>
+
+                </div>
+              )}
             </div>
           </div>
         </div>

@@ -4,7 +4,9 @@ import "./App.css";
 const images = [
   "/sringeri.webp",
   "/adhistana.jpeg",
-  "/shankaracharya.png"
+  "/shankaracharya.png",
+  "/sharadhaparameshwari.png",
+  "/shankara.jpeg",
 ];
 
 function CarouselComponent() {
@@ -43,6 +45,7 @@ function CarouselComponent() {
           transform: `translateX(-${currentSlide * (100 / extendedImages.length)}%)`,
           width: `${extendedImages.length * 100}%`,
           transition: isAnimating ? "transform 0.5s ease-in-out" : "none",
+          willChange: "transform"
         }}
       >
         {extendedImages.map((src, idx) => (
