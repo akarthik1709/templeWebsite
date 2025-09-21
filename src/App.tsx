@@ -11,7 +11,7 @@ export default function App() {
   const contactRef = useRef<HTMLDivElement>(null);
   const eventsRef = useRef<HTMLDivElement>(null);
   const servicesRef = useRef<HTMLDivElement>(null);
-  const resourcesRef = useRef<HTMLDivElement>(null);
+  //const resourcesRef = useRef<HTMLDivElement>(null);
 
 
   useEffect(() => {
