@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
 import About from './About.tsx'
-import CalendarFunc from './Calendar'
+import FullCalendarComponent from './Calendar'
 import { BrowserRouter as Router, Routes, Route } from'react-router-dom'
 
 const routes = (
@@ -11,7 +11,7 @@ const routes = (
     <Routes>
       <Route path="/" element={<App />} />
       <Route path="/about" element={<About />} />
-      <Route path="/events/calendar" element={<CalendarFunc />} />
+      <Route path="/events/calendar" element={<FullCalendarComponent />} />
     </Routes>
   </Router>
 
