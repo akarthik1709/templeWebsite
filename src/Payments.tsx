@@ -6,8 +6,9 @@ import './App.css';
 import {Link} from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements, CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
+import { env } from "process";
 
-const stripePromise = loadStripe(import.meta.env.STRIPE_PUBLISHABLE_KEY);
+const stripePromise = loadStripe(env.STRIPE_PUBLISHABLE_KEY || "");
 
 const CheckoutForm = ({ amount, setPaymentSuccess, setPaymentFailure, setPaymentProcessing, setPaymentError, paymentProcessing }: { amount: number, setPaymentSuccess: React.Dispatch<React.SetStateAction<boolean>>, setPaymentFailure: React.Dispatch<React.SetStateAction<boolean>>, setPaymentProcessing: React.Dispatch<React.SetStateAction<boolean>>, setPaymentError: React.Dispatch<React.SetStateAction<string>>, paymentProcessing: boolean }) => {
     const stripe = useStripe();
@@ -27,6 +28,7 @@ const CheckoutForm = ({ amount, setPaymentSuccess, setPaymentFailure, setPayment
         }
 
         const cardElement = elements.getElement(CardElement);
+        console.log('Card Element:', cardElement);
 
         if (!cardElement) {
             setPaymentError("Card element not found.");
@@ -86,7 +88,9 @@ const CheckoutForm = ({ amount, setPaymentSuccess, setPaymentFailure, setPayment
             <input type="text" placeholder="State" />
             <input type="text" placeholder="Zip Code" />
             <div style={{ border: '1px solid #ccc', padding: '10px', borderRadius: '4px', marginBottom: '10px' }}>
+            <label>
                 <CardElement />
+            </label>
             </div>
             <button type="submit" disabled={!stripe || paymentProcessing || amount <= 0}>
                 {paymentProcessing ? 'Processing...' : `Pay ${amount}`}
@@ -110,7 +114,7 @@ export default function Payments() {
   const [amount, setAmount] = useState(0);
   const [paymentError, setPaymentError] = useState("");
   const [paymentSuccess, setPaymentSuccess] = useState(false);
-  const [, setPaymentProcessing] = useState(false);
+  const [ , setPaymentProcessing] = useState(false);
   const [paymentFailure, setPaymentFailure] = useState(false);
   
 
