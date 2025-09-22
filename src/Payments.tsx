@@ -7,7 +7,7 @@ import {Link} from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements, CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 
-const stripePromise = loadStripe("pk_test_51SAFDDFzrLeB0W02CY4j6maRxKxLpzE3rrvZav1QsufkVhvf9Pi0mwc74nYhy9QRcT3ZZv2ZtQYSprQFZNY3gxTn00DdDh4fJm"); // Replace with your Stripe publishable key
+const stripePromise = loadStripe(import.meta.env.STRIPE_PUBLISHABLE_KEY);
 
 const CheckoutForm = ({ amount, setPaymentSuccess, setPaymentFailure, setPaymentProcessing, setPaymentError, paymentProcessing }: { amount: number, setPaymentSuccess: React.Dispatch<React.SetStateAction<boolean>>, setPaymentFailure: React.Dispatch<React.SetStateAction<boolean>>, setPaymentProcessing: React.Dispatch<React.SetStateAction<boolean>>, setPaymentError: React.Dispatch<React.SetStateAction<string>>, paymentProcessing: boolean }) => {
     const stripe = useStripe();
@@ -108,17 +108,10 @@ export default function Payments() {
   const servicesRef = useRef<HTMLDivElement>(null);
   //const resourcesRef = useRef<HTMLDivElement>(null);
   const [amount, setAmount] = useState(0);
-  const [paymentStatus, setPaymentStatus] = useState("");
   const [paymentError, setPaymentError] = useState("");
-  const [paymentId, setPaymentId] = useState("");
-  const [paymentIntent, setPaymentIntent] = useState(null);
-  const [paymentMethodId, setPaymentMethodId] = useState("");
-  const [paymentMethod, setPaymentMethod] = useState("credit");
-  const [paymentSource, setPaymentSource] = useState(null);
   const [paymentSuccess, setPaymentSuccess] = useState(false);
-  const [paymentProcessing, setPaymentProcessing] = useState(false);
+  const [ paymentProcessing, setPaymentProcessing] = useState(false);
   const [paymentFailure, setPaymentFailure] = useState(false);
-  const [isPaymentCancelled, setIsPaymentCancelled] = useState(false);
   
 
 
