@@ -5,10 +5,10 @@ import './Payments.css';
 import './App.css';
 import {Link} from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
-import { Elements, CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
-import { env } from "process";
+import { Elements, CardElement, PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js";
+import process  from "process";
 
-const stripePromise = loadStripe(env.STRIPE_PUBLISHABLE_KEY || "");
+const stripePromise = loadStripe(process.env.STRIPE_PUBLISHABLE_KEY || "");
 
 const CheckoutForm = ({ amount, setPaymentSuccess, setPaymentFailure, setPaymentProcessing, setPaymentError, paymentProcessing }: { amount: number, setPaymentSuccess: React.Dispatch<React.SetStateAction<boolean>>, setPaymentFailure: React.Dispatch<React.SetStateAction<boolean>>, setPaymentProcessing: React.Dispatch<React.SetStateAction<boolean>>, setPaymentError: React.Dispatch<React.SetStateAction<string>>, paymentProcessing: boolean }) => {
     const stripe = useStripe();
@@ -88,9 +88,10 @@ const CheckoutForm = ({ amount, setPaymentSuccess, setPaymentFailure, setPayment
             <input type="text" placeholder="State" />
             <input type="text" placeholder="Zip Code" />
             <div style={{ border: '1px solid #ccc', padding: '10px', borderRadius: '4px', marginBottom: '10px' }}>
-            <label>
                 <CardElement />
-            </label>
+            </div>
+            <div>
+                <PaymentElement/>
             </div>
             <button type="submit" disabled={!stripe || paymentProcessing || amount <= 0}>
                 {paymentProcessing ? 'Processing...' : `Pay ${amount}`}

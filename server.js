@@ -1,7 +1,7 @@
-import {env} from 'process';
+const process = require('process');
 const express = require('express');
 const app = express();
-const stripe = require('stripe')( env.STRIPE_SECRET_KEY || ""); 
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY); 
 const port = 4242;
 app.use(express.static('public'));
 app.use(express.json());
