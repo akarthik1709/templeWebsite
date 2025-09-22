@@ -4,6 +4,7 @@ import './index.css'
 import App from './App.tsx'
 import About from './About.tsx'
 import FullCalendarComponent from './Calendar'
+import Payments from './Payments'
 import { BrowserRouter as Router, Routes, Route } from'react-router-dom'
 
 const routes = (
@@ -11,7 +12,8 @@ const routes = (
     <Routes>
       <Route path="/" element={<App />} />
       <Route path="/about" element={<About />} />
-      <Route path="/events/calendar" element={<FullCalendarComponent />} />   
+      <Route path="/events/calendar" element={<FullCalendarComponent />} />  
+      <Route path="/services/payments" element={<Payments/>} />
     </Routes>
   </Router>
 

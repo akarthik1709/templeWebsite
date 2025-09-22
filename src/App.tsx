@@ -107,7 +107,7 @@ export default function App() {
               </button>
               {isServicesOpen && (
                 <div className="dropdown-menu">
-                  <a href="https://sringeri.net/contact" className="dropdown-item">Online Payment</a>
+                  <Link to="/services/payments" className="dropdown-item">Online Payment</Link>
                 </div>
               )}
             </div>

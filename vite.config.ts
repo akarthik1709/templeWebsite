@@ -5,5 +5,8 @@ import { defineConfig } from 'vite'
 export default defineConfig ({
   server: {
     open: 'index.html',
-  },
+    proxy: {
+        '/create-payment-intent': 'http://localhost:4242',
+      },
+    },
 })
