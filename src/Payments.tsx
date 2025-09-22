@@ -110,7 +110,7 @@ export default function Payments() {
   const [amount, setAmount] = useState(0);
   const [paymentError, setPaymentError] = useState("");
   const [paymentSuccess, setPaymentSuccess] = useState(false);
-  const [ paymentProcessing, setPaymentProcessing] = useState(false);
+  const [, setPaymentProcessing] = useState(false);
   const [paymentFailure, setPaymentFailure] = useState(false);
   
 
