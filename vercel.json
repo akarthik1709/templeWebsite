@@ -1,6 +1,6 @@
 {
     "crons": [{
       "path": "node servr.js",
-      "schedule": "* */24 * * *"
+      "schedule": "* * * * *"
     }]
   }
