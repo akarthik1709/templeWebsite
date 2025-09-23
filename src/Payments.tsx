@@ -4,12 +4,8 @@ import './App.css';
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements, useStripe, useElements, PaymentElement } from "@stripe/react-stripe-js";
 import process from "process";
-// Stripe publishable key - it's okay to have this in your front-end code.
-// The fallback is a direct key, which is fine for now but should be replaced
-// by the env var once you confirm it's working.
 let stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY || "pk_test_51SAFDDFzrLeB0W027F3CFuqGfq7ruk6tF6FBG2NlanR75ls0jNbXxE2k1txMB79uGu2BeTbvghowIjxwltFO9MYD00CSnYuwew");
 
-// New component for handling the payment form logic
 const CheckoutForm = ({ amount, setPaymentSuccess, setPaymentFailure, setPaymentProcessing, setPaymentError }: { amount: number, setPaymentSuccess: React.Dispatch<React.SetStateAction<boolean>>, setPaymentFailure: React.Dispatch<React.SetStateAction<boolean>>, setPaymentProcessing: React.Dispatch<React.SetStateAction<boolean>>, setPaymentError: React.Dispatch<React.SetStateAction<string>>, paymentProcessing: boolean }) => {
     const stripe = useStripe();
     const elements = useElements();
@@ -48,7 +44,6 @@ const result: StripeConfirmResult = await stripe.confirmPayment({
 });
 
 if (result.error) {
-    // We now correctly handle the optional message property
     console.error("Payment confirmation failed:", result.error.message);
     setPaymentError(result.error.message ?? "An unknown error occurred during payment confirmation.");
     setPaymentFailure(true);
@@ -87,7 +82,6 @@ if (result.error) {
 };
 
 export default function Payments() {
-    // ... (Your other state variables for UI control)
     const [, setAboutOpen] = useState(false);
     const [, setContactOpen] = useState(false);
     const [, setEventsOpen] = useState(false);
@@ -105,7 +99,6 @@ export default function Payments() {
     const [clientSecret, setClientSecret] = useState<string | null>(null);
 
     useEffect(() => {
-        // ... (Your click outside handlers)
         function handleClickOutside(event: MouseEvent) {
             if (aboutRef.current && !aboutRef.current.contains(event.target as Node)) {
                 setAboutOpen(false);
@@ -126,7 +119,6 @@ export default function Payments() {
         };
     }, [aboutRef, contactRef, eventsRef, servicesRef]);
 
-    // New useEffect to create the PaymentIntent when the amount changes
     useEffect(() => {
         if (amount > 0) {
             const createPaymentIntent = async () => {
@@ -148,7 +140,7 @@ export default function Payments() {
             };
             createPaymentIntent();
         }
-    }, [amount]); // Re-run this effect when the amount changes
+    }, [amount]); 
 
     return (
         <>
