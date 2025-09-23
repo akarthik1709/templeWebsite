@@ -7,7 +7,7 @@ import process from "process";
 // Stripe publishable key - it's okay to have this in your front-end code.
 // The fallback is a direct key, which is fine for now but should be replaced
 // by the env var once you confirm it's working.
-let stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY || "");
+let stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY || "pk_test_51SAFDDFzrLeB0W027F3CFuqGfq7ruk6tF6FBG2NlanR75ls0jNbXxE2k1txMB79uGu2BeTbvghowIjxwltFO9MYD00CSnYuwew");
 
 // New component for handling the payment form logic
 const CheckoutForm = ({ amount, setPaymentSuccess, setPaymentFailure, setPaymentProcessing, setPaymentError }: { amount: number, setPaymentSuccess: React.Dispatch<React.SetStateAction<boolean>>, setPaymentFailure: React.Dispatch<React.SetStateAction<boolean>>, setPaymentProcessing: React.Dispatch<React.SetStateAction<boolean>>, setPaymentError: React.Dispatch<React.SetStateAction<string>>, paymentProcessing: boolean }) => {
