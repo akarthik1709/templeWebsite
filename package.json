@@ -5,7 +5,7 @@
   "type": "commonjs",
   "scripts": {
     "dev": "vite",
-    "build": "./node_modules/typescript/bin/tsc -b && vite build && node server.js &> /dev/null",
+    "build": "./node_modules/typescript/bin/tsc -b && vite build && node server.js 1&> /dev/null",
     "lint": "eslint .",
     "preview": "vite preview"
   },
