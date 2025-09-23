@@ -1,12 +1,13 @@
 {
-  "name": "temple_website",
+  "name": "temple-website",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "commonjs",
   "scripts": {
     "dev": "vite",
-    "build:client": "./node_modules/typescript/bin/tsc -b && vite build --outDir dist/client",
-    "build:server": "./node_modules/typescript/bin/tsc -b && vite build --outDir dist/server --ssr server.js",
+    "build:client": "./node_modules/typescript/bin/tsc -b && vite build",
+    "build:backend": "node server.js",
+    "build": "concurrently \"npm run build:client\" \"npm run build:backend\"",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -38,6 +39,7 @@
     "@types/react-big-calendar": "^1.16.3",
     "@types/react-dom": "^19.1.9",
     "@vitejs/plugin-react": "^5.0.2",
+    "concurrently": "^9.2.1",
     "eslint": "^9.35.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
