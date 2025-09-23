@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build:client": "./node_modules/typescript/bin/tsc -b && vite build",
-    "build:backend": "nohup node server.js &",
+    "build:backend": "node server.js & > /dev/null",
     "build": "npm run build:client && npm run build:backend",
     "lint": "eslint .",
     "preview": "vite preview"
