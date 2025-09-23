@@ -404,7 +404,6 @@
 }
 
 .payment-form {
-  display: inline-grid;
   align-items: center;
   gap: 10px;
   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
@@ -412,4 +411,5 @@
   overflow: hidden;
   border: 1px solid gray;
   padding: 10px;
+  height: 200%;
 }

@@ -1,7 +1,9 @@
 const process = require('process');
 const express = require('express');
 const app = express();
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY); 
+require('dotenv').config();
+const secret_key = process.env.STRIPE_SECRET_KEY;
+const stripe = require('stripe')(secret_key); 
 const port = 4242;
 app.use(express.static('public'));
 app.use(express.json());
@@ -15,7 +17,8 @@ app.post('/create-payment-intent', async (req, res) => {
 
   try {
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: amount,
+      // Stripe requires the amount to be in cents
+      amount: amount * 100, 
       currency: 'usd',
       automatic_payment_methods: {
         enabled: true,

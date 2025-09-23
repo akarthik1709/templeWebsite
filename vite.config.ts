@@ -4,7 +4,6 @@ import { defineConfig } from 'vite'
 // https://vitejs.dev/config/
 export default defineConfig ({
   server: {
-    open: 'index.html',
     proxy: {
         '/create-payment-intent': 'http://localhost:4242',
       },
