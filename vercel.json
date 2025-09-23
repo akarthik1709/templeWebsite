@@ -1,6 +1,6 @@
 {
     "crons": [{
-      "path": "./server.js",
-      "schedule": "* * * * *"
+      "path": "/api/every-day",
+      "schedule": "0 0 * * *"
     }]
   }
