@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build:client": "./node_modules/typescript/bin/tsc -b && vite build",
-    "build": "npm run build:client",
+    "build:server": "node server/server.js 1& --quiet=true",
+    "build": "npm run build:client && npm run build:server",
     "lint": "eslint .",
     "preview": "vite preview"
   },
