@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build:client": "./node_modules/typescript/bin/tsc -b && vite build",
-    "prod": "NODE_ENV=production node server/server.js",
+    "prod": "NODE_ENV=production nohup node server/server.js >> app.log 2>&1 &",
     "build": "npm run build:client && npm run prod",
     "lint": "eslint .",
     "preview": "vite preview"
