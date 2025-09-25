@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build:client": "./node_modules/typescript/bin/tsc -b && vite build",
-    "prod": "NODE_ENV=production nohup node server/server.js >> app.log 2>&1 &",
+    "prod": "forever start -c node server/server.js",
     "build": "npm run build:client",
     "lint": "eslint .",
     "preview": "vite preview"
@@ -22,6 +22,7 @@
     "embla-carousel": "^8.6.0",
     "embla-carousel-react": "^8.6.0",
     "express": "^5.1.0",
+    "forever": "^4.0.3",
     "material": "^0.9.24",
     "process": "^0.11.10",
     "react": "^19.1.1",
