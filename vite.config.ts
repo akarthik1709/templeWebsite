@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      '/create-payment-intent': 'http://127.0.0.1:4242',
+      '/create-payment-intent': 'https://sringeri-sharadhapeetam.vercel.app:4242',
     },
   },
 });
