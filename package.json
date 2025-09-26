@@ -5,10 +5,8 @@
   "type": "commonjs",
   "scripts": {
     "dev": "vite",
-    "build:client": "./node_modules/typescript/bin/tsc -b && vite build",
-    "prod": "forever start -c node server/server.js",
-    "build": "npm run build:client",
-    "lint": "eslint .",
+    "build": "tsc && vite build",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -34,7 +32,8 @@
     "react-dom": "^19.1.1",
     "stripe": "^18.5.0",
     "tw-elements": "^2.0.0",
-    "tw-elements-react": "^1.0.0-alpha-end"
+    "tw-elements-react": "^1.0.0-alpha-end",
+    "vite-plugin-node": "^7.0.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.35.0",
