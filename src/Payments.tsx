@@ -1,85 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import './Payments.css';
 import './App.css';
-import { loadStripe } from "@stripe/stripe-js";
-import { Elements, useStripe, useElements, PaymentElement } from "@stripe/react-stripe-js";
-import process from "process";
-let stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY || "pk_test_51SAFDDFzrLeB0W027F3CFuqGfq7ruk6tF6FBG2NlanR75ls0jNbXxE2k1txMB79uGu2BeTbvghowIjxwltFO9MYD00CSnYuwew");
-
-const CheckoutForm = ({ amount, setPaymentSuccess, setPaymentFailure, setPaymentProcessing, setPaymentError }: { amount: number, setPaymentSuccess: React.Dispatch<React.SetStateAction<boolean>>, setPaymentFailure: React.Dispatch<React.SetStateAction<boolean>>, setPaymentProcessing: React.Dispatch<React.SetStateAction<boolean>>, setPaymentError: React.Dispatch<React.SetStateAction<string>>, paymentProcessing: boolean }) => {
-    const stripe = useStripe();
-    const elements = useElements();
-    const [isLoading, setIsLoading] = useState(false);
-
-    const handleSubmit = async (event: React.FormEvent) => {
-        event.preventDefault();
-        setPaymentProcessing(true);
-        setIsLoading(true);
-        setPaymentSuccess(false);
-        setPaymentFailure(false);
-        setPaymentError("");
-    
-        if (!stripe || !elements) {
-            setPaymentError("Stripe.js has not loaded yet.");
-            setPaymentProcessing(false);
-            setIsLoading(false);
-            return;
-        }
-    
-        // Define a type for the successful or failed response
-type StripeConfirmResult = {
-    paymentIntent?: {
-        status: string;
-    };
-    error?: {
-        message?: string; // Corrected type: message is optional
-    };
-};
-
-const result: StripeConfirmResult = await stripe.confirmPayment({
-    elements,
-    confirmParams: {
-        return_url: `${window.location.origin}/services/payments`,
-    },
-});
-
-if (result.error) {
-    console.error("Payment confirmation failed:", result.error.message);
-    setPaymentError(result.error.message ?? "An unknown error occurred during payment confirmation.");
-    setPaymentFailure(true);
-} else if (result.paymentIntent) {
-    if (result.paymentIntent.status === 'succeeded') {
-        console.log('[PaymentIntent]', result.paymentIntent);
-        setPaymentSuccess(true);
-        setPaymentProcessing(false);
-    } else {
-        console.log(`Payment status: ${result.paymentIntent.status}`);
-        setPaymentError(`Payment failed with status: ${result.paymentIntent.status}`);
-        setPaymentFailure(true);
-    }
-}
-    
-        setIsLoading(false);
-    };
-
-    return (
-        <form className="payment-form" onSubmit={handleSubmit}>
-            <input type="text" placeholder="Full Name" required />
-            <input type="email" placeholder="Email Address" required />
-            <input type="text" placeholder="Phone Number" />
-            <input type="text" placeholder="Address" />
-            <input type="text" placeholder="City" />
-            <input type="text" placeholder="State" />
-            <input type="text" placeholder="Zip Code" />
-            <div style={{ marginBottom: '20px' }}>
-                <PaymentElement />
-            </div>
-            <button type="submit" disabled={!stripe || isLoading || amount <= 0}>
-                {isLoading ? 'Processing...' : `Pay ${amount}`}
-            </button>
-        </form>
-    );
-};
+import GooglePayButton from '@google-pay/button-react';
 
 export default function Payments() {
     const [, setAboutOpen] = useState(false);
@@ -96,7 +18,6 @@ export default function Payments() {
     const [paymentSuccess, setPaymentSuccess] = useState(false);
     const [paymentProcessing, setPaymentProcessing] = useState(false);
     const [paymentFailure, setPaymentFailure] = useState(false);
-    const [clientSecret, setClientSecret] = useState<string | null>(null);
 
     useEffect(() => {
         function handleClickOutside(event: MouseEvent) {
@@ -119,28 +40,41 @@ export default function Payments() {
         };
     }, [aboutRef, contactRef, eventsRef, servicesRef]);
 
-    useEffect(() => {
-        if (amount > 0) {
-            const createPaymentIntent = async () => {
-                try {
-                    const response = await fetch('/create-payment-intent', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ amount: amount * 100 }) // Amount in cents
-                    });
-                    const data = await response.json();
-                    if (data.error) {
-                        throw new Error(data.error);
-                    }
-                    setClientSecret(data.clientSecret);
-                } catch (error) {
-                    setPaymentError(error instanceof Error ? error.message : "Failed to create payment intent.");
-                    setPaymentFailure(true);
-                }
-            };
-            createPaymentIntent();
-        }
-    }, [amount]); 
+    const handlePaymentSuccess = (paymentData: google.payments.api.PaymentData) => {
+        setPaymentProcessing(true);
+        setPaymentFailure(false);
+        setPaymentSuccess(false);
+        setPaymentError("");
+        fetch('/api/process-google-pay', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                paymentToken: paymentData.paymentMethodData.tokenizationData.token,
+
+                amount: amount,
+            }),
+        })
+        .then(response => response.json())
+
+        .then(data => {
+            console.log("Data received from server:", data);
+            if (data.success) {
+                console.log('Payment successful:', data);
+                setPaymentSuccess(true);
+            } else {
+                throw new Error(data.error || 'Payment processing failed on the server.');
+            }
+        })
+        .catch(err => {
+            setPaymentError(err instanceof Error ? err.message : "Failed to process Google Pay payment.");
+            setPaymentFailure(true);
+        })
+        .finally(() => {
+            setPaymentProcessing(false);
+        });
+    };
 
     return (
         <>
@@ -166,19 +100,53 @@ export default function Payments() {
                                 required
                             />
                         </div>
-                        {clientSecret && (
-                            <Elements options={{ clientSecret }} stripe={stripePromise}>
-                                <CheckoutForm
-                                    amount={amount}
-                                    setPaymentSuccess={setPaymentSuccess}
-                                    setPaymentFailure={setPaymentFailure}
-                                    setPaymentProcessing={setPaymentProcessing}
-                                    setPaymentError={setPaymentError}
-                                    paymentProcessing={paymentProcessing}
-                                />
-                            </Elements>
+                        {amount > 0 && (
+                            <GooglePayButton
+                                environment="TEST" 
+                                paymentRequest={{
+                                    apiVersion: 2,
+                                    apiVersionMinor: 0,
+                                    allowedPaymentMethods: [
+                                        {
+                                            type: 'CARD',
+                                            parameters: {
+                                                allowedAuthMethods: ['PAN_ONLY', 'CRYPTOGRAM_3DS'],
+                                                allowedCardNetworks: ["AMEX", "DISCOVER", "INTERAC", "JCB", "MASTERCARD", "VISA"],
+                                            },
+                                            tokenizationSpecification: {
+                                                type: 'PAYMENT_GATEWAY',
+                                                parameters: {
+                                                  gateway: 'stripe',
+                                                  'stripe:version': '2020-08-27',
+                                                  'stripe:publishableKey': 'pk_test_51SAFDDFzrLeB0W02CY4j6maRxKxLpzE3rrvZav1QsufkVhvf9Pi0mwc74nYhy9QRcT3ZZv2ZtQYSprQFZNY3gxTn00DdDh4fJm'
+                                                }
+                                            },
+                                        },
+                                    ],
+                                    merchantInfo: {
+                                        merchantId: '12345678901234567890',
+                                        merchantName: 'Example Merchant',
+                                    },
+                                    transactionInfo: {
+                                        totalPriceStatus: 'FINAL',
+                                        totalPriceLabel: 'Total',
+                                        totalPrice: String(amount),
+                                        currencyCode: 'USD',
+                                        countryCode: 'US',
+                                    },
+                                }}
+                                onLoadPaymentData={handlePaymentSuccess}
+                                onReadyToPayChange={isReady => console.log('Ready to pay:', isReady)}
+                                onError={error => {
+                                    console.error('Google Pay Error:', error);
+                                    setPaymentError(error.toString());
+                                    setPaymentFailure(true);
+                                }}
+                                buttonType="donate"
+                                buttonSizeMode="fill"
+                            />
                         )}
-                        {!clientSecret && amount > 0 && <p>Loading payment form...</p>}
+                        {paymentProcessing && <p>Processing payment...</p>}
                     </div>
                 </div>
             </div>

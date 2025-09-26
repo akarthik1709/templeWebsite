@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   server: { 
     proxy: {
-      '/create-payment-intent': 'http://localhost:4242',
+      '/api/process-google-pay': 'http://localhost:4242',
     },
   },
 });

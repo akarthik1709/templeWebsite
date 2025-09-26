@@ -5,29 +5,24 @@ require('dotenv').config();
 const secret_key = process.env.STRIPE_SECRET_KEY;
 const stripe = require('stripe')(secret_key); 
 const port = 4242;
-app.use(express.static('build'));
+app.use(express.static('public'));
 app.use(express.json());
 
 
-app.post('/create-payment-intent', async (req, res) => {
+app.post('/api/process-google-pay', async (req, res) => {
   const { amount } = req.body;
-
-  if (!amount || amount <= 0) {
-    return res.status(400).send({ error: 'Invalid amount' });
-  }
-
+  console.log('Received payment request:', JSON.stringify(req.body));
   try {
     const paymentIntent = await stripe.paymentIntents.create({
       amount: amount * 100, 
-      currency: 'inr',
-      automatic_payment_methods: {
-        enabled: true,
-      },
+      currency: 'usd',
+      payment_method_types: ['card'],
     });
-
     res.send({
       clientSecret: paymentIntent.client_secret,
     });
+    console.log("Response"+res.body);
+
   } catch (e) {
     res.status(500).send({ error: e.message });
   }
