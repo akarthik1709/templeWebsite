@@ -58,7 +58,6 @@ export default function Payments() {
         .then(response => response.json())
 
         .then(data => {
-            console.log("Data received from server:", data);
             if (data.success) {
                 console.log('Payment successful:', data);
                 setPaymentSuccess(true);

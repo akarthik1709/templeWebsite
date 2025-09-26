@@ -1,19 +1,14 @@
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-import { VitePluginNode } from 'vite-plugin-node';
-
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
 export default defineConfig({
-  plugins: [
-    react(),
-    ...VitePluginNode({
-      // Node-plugin options
-      adapter: 'express',
-      appPath: './server/server.js',
-      exportName: 'viteNodeApp',
-      tsCompiler: 'esbuild',
-    })
-  ],
+  plugins: [react()],
   server: {
-    port: 3000 // Your frontend port
-  }
-});
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3001', // Your Express server's address
+        changeOrigin: true,
+        secure: false,
+      },
+    },
+  },
+})
