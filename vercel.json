@@ -2,9 +2,8 @@
   "version": 2,
   "functions": {
     "server/server.ts": {
-      "runtime": "@vercel/node@3.0.0",
-      "includeFiles": ["dist/**", "package.json"] 
-    }
+      "runtime": "@vercel/node@3.0.0"    
+  }
   },
   "routes": [
     {
