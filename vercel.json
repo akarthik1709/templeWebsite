@@ -1,6 +1,16 @@
 {
-    "crons": [{
-      "path": "/api/every-day",
-      "schedule": "0 0 * * *"
-    }]
-  }
+  "version": 2,
+  "builds": [
+   {
+   "src": "./server/server.ts",
+   "use": "@vercel/node"
+   }
+   ],
+  "routes": [
+  {
+   "src": "/(.*)",
+    "dest": "/api/process-google-pay"
+   }
+  ],
+ "installCommand": "npm install"
+ }
