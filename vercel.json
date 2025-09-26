@@ -8,9 +8,9 @@
    ],
   "routes": [
   {
-   "src": "/(.*)",
+   "src": "/api",
     "dest": "/api/process-google-pay"
    }
   ],
- "installCommand": "npm install"
+ "installCommand": "npm run prod:start"
  }
