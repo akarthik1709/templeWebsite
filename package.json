@@ -3,17 +3,12 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-"scripts": {
-  "dev": "vite --config vite.config.ts",
-  "build": "tsc && vite build --config vite.config.ts",
-  "start": "node server/server.ts",
-  "serve": "npm run build && npm start",
-  "prod:start": "npm run build && forever start server/server.ts",
-  "prod:stop": "forever stop dist/server.js",
-  "prod:restart": "forever restart dist/server.js",
-  "prod:logs": "forever logs dist/server.js -f",
-  "preview": "vite preview --config vite.config.ts"
-},
+  "scripts": {
+    "dev": "vite --config vite.config.ts",
+    "build": "npm run build:frontend && npm run build:backend", 
+    "build:frontend": "tsc && vite build --config vite.config.ts", 
+    "build:backend": "tsc --outDir server-dist server/server.ts"
+  },
   "dependencies": {
     "@fullcalendar/daygrid": "^6.1.19",
     "@fullcalendar/interaction": "^6.1.19",

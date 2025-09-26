@@ -6,5 +6,9 @@
   ],
   "compilerOptions": {
     "types": ["node"],
+    "target": "ES2020",
+    "module": "CommonJS", // Ensure Node.js compatibility for the server code
+    "moduleResolution": "node",
+    "esModuleInterop": true,
   }
 }
