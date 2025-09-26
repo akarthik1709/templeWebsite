@@ -1,0 +1,8 @@
+# .vercelignore
+
+# Ignore the root node_modules directory
+node_modules
+
+# But allow the server's directory
+!server
+
