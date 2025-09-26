@@ -7,7 +7,7 @@
       "config": {
         "includeFiles": [
           "dist/**",
-          "package.json",
+          "package.json"
         ]
       }
     }
