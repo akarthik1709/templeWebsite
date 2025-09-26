@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import './Payments.css';
 import './App.css';
 import GooglePayButton from '@google-pay/button-react';
@@ -52,7 +52,6 @@ export default function Payments() {
             },
             body: JSON.stringify({
                 paymentToken: paymentData.paymentMethodData.tokenizationData.token,
-
                 amount: amount,
             }),
         })
