@@ -1,19 +1,19 @@
 
-import express from 'express';
-import path from 'path';
-import { fileURLToPath } from 'url';
-
+const express = require('express');
+const path = require('path');
+const {fileURLToPath} = require('url');
+const meta = require('meta.url')
 const app = express();
 const port = process.env.PORT || 3001;
 
 // The __dirname variable is not available in ES modules, so we need to create it.
-const __filename = fileURLToPath(import.meta.url);
+const __filename = fileURLToPath(meta);
 const __dirname = path.dirname(__filename);
 
 app.use(express.json());
 
 // API endpoint for processing payments
-app.post('/api/process-google-pay', async (req, res) => {
+app.post('/api/process-google-pay', async (req: { body: { paymentToken: any; amount: any; }; }, res: { json: (arg0: { success: boolean; message: string; }) => void; status: (arg0: number) => { (): any; new(): any; json: { (arg0: { success: boolean; error: string; }): void; new(): any; }; }; }) => {
   const { paymentToken, amount } = req.body;
 
   console.log('Received payment token:', paymentToken);
@@ -40,7 +40,7 @@ const buildPath = path.join(__dirname, 'templeWebsite/dist');
 app.use(express.static(buildPath));
 
 // For any other request, serve the React app's index.html
-app.get('/', (req, res) => {
+app.get('/', (_req: any, res: { sendFile: (arg0: any) => void; }) => {
   res.sendFile(path.join(buildPath, 'index.html'));
 });
 

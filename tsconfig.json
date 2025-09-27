@@ -1,14 +1,8 @@
+// tsconfig.json (in root directory)
 {
   "files": [],
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
-  ],
-  "compilerOptions": {
-    "types": ["node"],
-    "target": "ES2020",
-    "module": "NodeNext",          
-    "moduleResolution": "NodeNext",
-    "esModuleInterop": true,
-  }
+  ]
 }

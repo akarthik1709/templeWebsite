@@ -6,7 +6,6 @@
       "use": "@vercel/node@2.0.0" 
     }
   ],
-  
   "routes": [
     {
       "src": "/api/(.*)",

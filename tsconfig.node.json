@@ -1,25 +1,17 @@
+// tsconfig.node.json
 {
+  "extends": "./tsconfig.json", // Good practice to inherit baseline settings
   "compilerOptions": {
-    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
-    "target": "ES2023",
-    "lib": ["ES2023"],
-    "module": "ESNext",
-    "skipLibCheck": true,
-
-    /* Bundler mode */
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
-    "verbatimModuleSyntax": true,
-    "moduleDetection": "force",
-    "noEmit": true,
-
-    /* Linting */
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "esModuleInterop": true,
+    
+    "target": "ES2022",
+    "outDir": "server-dist", // Matches your "build:backend" script
     "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "erasableSyntaxOnly": true,
-    "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "skipLibCheck": true,
+    "rootDir": "." // Include files from the root context
   },
-  "include": ["vite.config.ts"]
+  "include": ["server/**/*.ts"], 
+  "exclude": ["node_modules", "dist", "src"] 
 }
