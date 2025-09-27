@@ -1,15 +1,14 @@
 {
   "version": 2,
-  "config": {
-    "memory": "512mb"
-  },
+  
   "builds": [
     {
       "src": "package.json", 
       "use": "@vercel/static-build",
       "config": {
         "buildCommand": "npm run build:frontend && npm run build:backend", 
-        "outputDirectory": "dist" 
+        "outputDirectory": "dist", 
+        "memory": "512mb"
       }
     },
     {
