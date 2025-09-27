@@ -3,19 +3,28 @@
   
   "builds": [
     {
+      // 1. Defines the serverless function from your source file.
       "src": "server/server.ts",
       "use": "@vercel/node@2.0.0" 
-    },
-    {
-      "src": "index.html",
-      "dest": "dist/index.html"
     }
   ],
   
   "routes": [
     {
+      // 2. Routes all API calls to the serverless function.
       "src": "/api/(.*)",
       "dest": "server/server.ts"
+    },
+    {
+      // 3. Catches all other routes (for the React frontend)
+      // This is a common pattern for single-page applications (SPA).
+      "src": "/[^/]*",
+      "dest": "/index.html"
     }
-  ]
+  ],
+
+  // 4. Ensures static assets (like JS, CSS, fonts from your Vite 'dist' folder) 
+  // are served correctly. This is usually the default, but explicitly enabling 
+  // features like cleanUrls can sometimes help with asset routing.
+  "cleanUrls": true 
 }
