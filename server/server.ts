@@ -1,29 +1,28 @@
+import express from 'express';
+import path from 'path';
+import { fileURLToPath } from 'url'; // This must be an 'import'
+import type { Request, Response } from 'express'; // Use type imports for clearer types
 
-const express = require('express');
-const path = require('path');
-const {fileURLToPath} = require('url');
-const meta = require('meta.url')
 const app = express();
 const port = process.env.PORT || 3001;
 
-// The __dirname variable is not available in ES modules, so we need to create it.
-const __filename = fileURLToPath(meta);
+// --- CRITICAL FIX: Use the correct import.meta.url syntax ---
+// This is the standard, correct way to derive __filename and __dirname in ES Modules.
+const __filename = fileURLToPath(import.meta.url); 
 const __dirname = path.dirname(__filename);
+// -----------------------------------------------------------
 
 app.use(express.json());
 
 // API endpoint for processing payments
-app.post('/api/process-google-pay', async (req: { body: { paymentToken: any; amount: any; }; }, res: { json: (arg0: { success: boolean; message: string; }) => void; status: (arg0: number) => { (): any; new(): any; json: { (arg0: { success: boolean; error: string; }): void; new(): any; }; }; }) => {
+// Use the Request and Response types from 'express' instead of inline definitions
+app.post('/api/process-google-pay', async (req: Request, res: Response) => {
   const { paymentToken, amount } = req.body;
 
   console.log('Received payment token:', paymentToken);
   console.log('Amount:', amount);
 
-  // IMPORTANT: Add your actual payment processing logic with Stripe here.
-  // This is a mock implementation.
   try {
-    // Example: const charge = await stripe.charges.create({ ... });
-    // For now, we'll just simulate a successful payment.
     if (paymentToken && amount > 0) {
       res.json({ success: true, message: 'Payment processed successfully' });
     } else {
@@ -36,17 +35,20 @@ app.post('/api/process-google-pay', async (req: { body: { paymentToken: any; amo
 });
 
 // Serve static files from the React app build directory
+// NOTE: Make sure 'templeWebsite/dist' is the correct path *relative to the project root*
 const buildPath = path.join(__dirname, 'templeWebsite/dist');
 app.use(express.static(buildPath));
 
 // For any other request, serve the React app's index.html
-app.get('/', (_req: any, res: { sendFile: (arg0: any) => void; }) => {
+// Ensure this path is correct for your Vercel deployment structure
+app.get('/', (req: Request, res: Response) => {
   res.sendFile(path.join(buildPath, 'index.html'));
 });
 
-export default app; // This is what Vercel needs to execute the function.
+// Vercel Serverless Requirement
+export default app; 
 
-// This entire block is only for local execution (dev or npm start)
+// Local execution block (keep this wrapped)
 if (process.env.NODE_ENV !== 'production' && process.env.VERCEL !== '1') {
   app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
