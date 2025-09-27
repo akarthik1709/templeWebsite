@@ -4,7 +4,7 @@ import express from 'express';
 import path from 'path';
 // REMOVE: import { fileURLToPath } from 'url'; // No longer needed
 import type { Request, Response } from 'express'; 
-
+import cors from 'cors';
 const app = express();
 const port = process.env.PORT || 3001;
 
@@ -13,7 +13,7 @@ const port = process.env.PORT || 3001;
 // const __filename = fileURLToPath(import.meta.url); 
 // const __dirname = path.dirname(__filename); 
 // -------------------------------------------------
-
+app.use(cors());
 app.use(express.json());
 
 // API endpoint for processing payments (omitting payment logic for brevity)
