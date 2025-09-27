@@ -1,6 +1,14 @@
 {
   "version": 2,
-  
+  "files": [
+    "src/**",
+    "server/**",
+    "test/**",
+    "public/**",
+    "dist/**",
+    "package.json",
+    "package-lock.json"
+  ],
   "builds": [
     {
       "src": "server/server.ts",
@@ -21,6 +29,5 @@
       "src": "/.*",
       "dest": "./dist/index.html"
     }
-  ],
-  "include": ["src", "server", "test", "public", "dist"]
+  ]
 }
