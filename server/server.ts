@@ -1,40 +1,42 @@
-// server/server.ts
-
 import express from 'express';
 import path from 'path';
-// REMOVE: import { fileURLToPath } from 'url'; // No longer needed
 import type { Request, Response } from 'express'; 
 import cors from 'cors';
 const app = express();
 const port = process.env.PORT || 3001;
 
-// --- CRITICAL FIX: REMOVE THE CONFLICTING CODE ---
-// REMOVE THESE LINES:
-// const __filename = fileURLToPath(import.meta.url); 
-// const __dirname = path.dirname(__filename); 
-// -------------------------------------------------
 app.use(cors());
 app.use(express.json());
 
-// API endpoint for processing payments (omitting payment logic for brevity)
-app.post('/api/process-google-pay', async (req: Request, res: Response) => {
-    // ... API logic ...
+app.post('/api/process-google-pay', async (req, res) => {
+  const { paymentToken, amount } = req.body;
+
+  console.log('Received payment token:', paymentToken);
+  console.log('Amount:', amount);
+  console.log('Response body', res); ;
+
+  try {
+    if (paymentToken && amount > 0) {
+      res.json({ success: true, message: 'Payment processed successfully' });
+    } else {
+      res.status(400).json({ success: false, error: 'Invalid payment data' });
+    }
+  } catch (error) {
+    console.error('Payment processing error:', error);
+    res.status(500).json({ success: false, error: 'Server error processing payment' });
+  }
 });
 
-// Serve static files from the React app build directory
-// NOTE: Use the global __dirname provided by the Vercel runtime
-const buildPath = path.join(__dirname, '../dist'); // Adjusted path
+
+const buildPath = path.join(__dirname, '../dist'); 
 app.use(express.static(buildPath));
 
-// For any other request, serve the React app's index.html
 app.get('/', (req: Request, res: Response) => {
     res.sendFile(path.join(buildPath, 'index.html'));
 });
 
-// Vercel Serverless Requirement
 export default app; 
 
-// Local execution block (keep this wrapped)
 if (process.env.NODE_ENV !== 'production' && process.env.VERCEL !== '1') {
   app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
