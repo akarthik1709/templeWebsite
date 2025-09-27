@@ -7,8 +7,7 @@
     "dev": "vite --config vite.config.ts",
     "build": "npm run build:frontend && npm run build:backend", 
     "build:frontend": "tsc && vite build --config vite.config.ts", 
-    "build:backend": "tsc server/server.ts --outDir server-dist --module CommonJS --esModuleInterop true",
-  
+    "build:backend": "tsc server/server.ts --outDir server-dist --module CommonJS --esModuleInterop true"
   },
   "dependencies": {
     "@fullcalendar/daygrid": "^6.1.19",
