@@ -22,6 +22,10 @@
       "dest": "server/server.ts"
     },
     {
+      "src": "/([^/]+\\.(?:js|css|ico|svg|png|jpg|jpeg|gif|webp))$",
+      "dest": "/$1"
+    },
+    {
       "src": "/.*",
       "dest": "/index.html"
     }
