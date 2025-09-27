@@ -13,7 +13,7 @@ app.post('/api/process-google-pay', async (req, res) => {
 
   console.log('Received payment token:', paymentToken);
   console.log('Amount:', amount);
-  console.log('Response body', res); ;
+  console.log('Response body', res.json); ;
 
   try {
     if (paymentToken && amount > 0) {
