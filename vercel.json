@@ -1,6 +1,8 @@
 {
   "version": 2,
-  
+  "config": {
+    "memory": "512mb"
+  },
   "builds": [
     {
       "src": "package.json", 
