@@ -44,7 +44,11 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(buildPath, 'index.html'));
 });
 
-export default app;
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
-});
+export default app; // This is what Vercel needs to execute the function.
+
+// This entire block is only for local execution (dev or npm start)
+if (process.env.NODE_ENV !== 'production' && process.env.VERCEL !== '1') {
+  app.listen(port, () => {
+    console.log(`Server is running on http://localhost:${port}`);
+  });
+}
