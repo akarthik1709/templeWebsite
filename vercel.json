@@ -1,14 +1,5 @@
 {
   "version": 2,
-  "files": [
-    "src/**",
-    "server/**",
-    "test/**",
-    "public/**",
-    "dist/**",
-    "package.json",
-    "package-lock.json"
-  ],
   "builds": [
     {
       "src": "server/server.ts",
@@ -18,16 +9,12 @@
   
   "routes": [
     {
-      "src": "/([^/\\.]+\\.[^/]+)$",
-      "dest": "/$1"
-    },
-    {
       "src": "/api/(.*)",
       "dest": "server/server.ts"
     },
     {
       "src": "/.*",
-      "dest": "./dist/index.html"
+      "dest": "/index.html"
     }
   ]
 }
