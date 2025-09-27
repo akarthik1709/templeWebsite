@@ -12,8 +12,8 @@
       "dest": "server/server.ts"
     },
     {
-      "src": "/[^/]*",
-      "dest": "/index.html"
+      "src": "/[^//]*",
+      "dest": "index.html"
     }
   ],
   "cleanUrls": true 
