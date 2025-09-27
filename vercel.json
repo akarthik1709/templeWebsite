@@ -19,7 +19,7 @@
   
   "routes": [
     {
-      "src": "/api/(.*)",
+      "src": "/api/process-google-pay",
       "dest": "server/server.ts"
     },
     {
