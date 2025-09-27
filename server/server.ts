@@ -44,6 +44,7 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(buildPath, 'index.html'));
 });
 
+export default app;
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
