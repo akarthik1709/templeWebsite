@@ -22,5 +22,5 @@
       "dest": "./dist/index.html"
     }
   ],
-  "includeDir": ["src", "server", "test", "public", "dist"]
+  "include": ["src", "server", "test", "public", "dist"]
 }
