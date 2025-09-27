@@ -5,6 +5,10 @@
     {
       "src": "server/server.ts",
       "use": "@vercel/node@2.0.0" 
+    },
+    {
+      "src": "index.html",
+      "dest": "dist/index.html"
     }
   ],
   
