@@ -12,7 +12,7 @@ export default function App() {
   const contactRef = useRef<HTMLDivElement>(null);
   const eventsRef = useRef<HTMLDivElement>(null);
   const servicesRef = useRef<HTMLDivElement>(null);
-  //const resourcesRef = useRef<HTMLDivElement>(null);
+  const resourcesRef = useRef<HTMLDivElement>(null);
 
 
   useEffect(() => {
@@ -30,6 +30,9 @@ export default function App() {
       if (servicesRef.current && !servicesRef.current.contains(event.target as Node )) {
         setServicesOpen(false);
       }
+      if (resourcesRef.current &&!resourcesRef.current.contains(event.target as Node )) {
+        setResourcesOpen(false);
+      }
 
     }
 
@@ -37,7 +40,7 @@ export default function App() {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [aboutRef, contactRef, eventsRef, servicesRef]);
+  }, [aboutRef, contactRef, eventsRef, servicesRef, resourcesRef]);
 
 
   return (
@@ -113,7 +116,7 @@ export default function App() {
             </div>
           </div>
           <div className="tab">
-            <div className="dropdown">
+            <div className="dropdown" ref={resourcesRef}>
               <button  onClick={()=> setResourcesOpen(!isResourcesOpen)} className="tabs">
                 Resources
               </button>
@@ -131,6 +134,15 @@ export default function App() {
         <p className="text-xl text-center my-8">
           Welcome to SharadhaPeetham, a temple dedicated to the Sharadhamba devi
         </p>
+        {/*This is the section for the text to be moving from left to right*/}
+        <div className="moving-text-container">
+          <div className="moving-text">
+            <p>
+              ಚಂದ್ರಿಕಾ ಧವಲೋದಾರ ಸಾಂದ್ರಕೀರ್ತಿಚ್ಛತಾಧರಂ ಇಂದ್ರಿಯೈದುರ್ಜಯಂ ನೌಮಿ ಚಂದ್ರಶೇಖರ ಭಾರತೀಮ್ ದ್ವಿತೀಯ ಚಂದ್ರಶೇಖರ ಭಾರತಿ ಸ್ವಾಮಿಗಳು || ನಮಸ್ತೇ ಶಾರದೇ ದೇವಿ ಕಾಶ್ಮೀರಾ-ಪುರ-ವಾಸಿನಿ ತ್ವಂ-ಅಹಂ ಪ್ರಾರ್ಥಯೇ ನಿತ್ಯಂ ವಿದ್ಯಾ ದಾನಂ ಚ ದೇಹಿ ಮೇ ||
+              ಶ್ರೀ ಶಾರದಾ ಪರಮೇಶ್ವರಿ ದೇವಿ ಶ್ರೀ ಶಂಕರಾಚಾರ್ಯ ವರ್ಯಂ ಸರ್ವ ಲೋಕೈಕ ವಂದ್ಯಂ ಭಜೇ ದೇಶಿಕೇಂದ್ರಂ ಶ್ರೀ ಆದಿ ಶಂಕರಾಚಾರ್ಯ
+            </p>
+          </div>
+        </div>
         <div className="carousel-container">
           <div className="carousel-images">
           <CarouselComponent/>

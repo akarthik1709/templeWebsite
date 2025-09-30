@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import './Payments.css';
 import './App.css';
 import GooglePayButton from '@google-pay/button-react';
+import { Link } from "react-router-dom";
 
 // Define the structure for the API response
 interface PaymentResponse {
@@ -11,49 +12,56 @@ interface PaymentResponse {
 }
 
 export default function Payments() {
-    // 1. Cleaned up unused state variables for clarity
-    // Removed setAboutOpen, setContactOpen, etc., as they were only used for hiding/showing elements,
-    // which aren't in this component's render block.
     const aboutRef = useRef<HTMLDivElement>(null);
     const contactRef = useRef<HTMLDivElement>(null);
     const eventsRef = useRef<HTMLDivElement>(null);
     const servicesRef = useRef<HTMLDivElement>(null);
+    const resourcesRef = useRef<HTMLDivElement>(null);
 
     const [amount, setAmount] = useState(0);
     const [paymentError, setPaymentError] = useState("");
     const [paymentSuccess, setPaymentSuccess] = useState(false);
     const [paymentProcessing, setPaymentProcessing] = useState(false);
     const [paymentFailure, setPaymentFailure] = useState(false);
+    const [isAboutOpen, setAboutOpen] = useState(false);
+    const [isContactOpen, setContactOpen] = useState(false);
+    const [isEventsOpen, setEventsOpen] = useState(false);
+    const [isServicesOpen, setServicesOpen] = useState(false);
+    const [isResourcesOpen, setResourcesOpen] = useState(false);
 
-    // 2. Optimized useEffect: Only includes necessary cleanup logic
-    // Removed the unused setters (setAboutOpen, etc.) from the dependency array.
     useEffect(() => {
-        const handleClickOutside = (event: MouseEvent) => {
-            // Note: Since the state setters are not included in this component's scope, 
-            // the logic below (which checks refs and tries to set state) is kept for context,
-            // but the setters have been removed from the component body for being unused.
-            // If this logic is needed, the setters must be defined and used.
-            // For now, the cleanup logic is kept simple.
-
-            // Example: If you need to access a setter, you must declare it: 
-            // const [isMenuOpen, setIsMenuOpen] = useState(false);
-        };
-        
-        // This effect's primary purpose is handling outside clicks based on refs.
+    
+        function handleClickOutside(event: MouseEvent) {
+          if (aboutRef.current && !aboutRef.current.contains(event.target as Node)) {
+            setAboutOpen(false);
+          }
+          if (contactRef.current && !contactRef.current.contains(event.target as Node )) {
+            setContactOpen(false);
+          }
+          if (eventsRef.current && !eventsRef.current.contains(event.target as Node )) {
+            setEventsOpen(false);
+          }
+          if (servicesRef.current && !servicesRef.current.contains(event.target as Node )) {
+            setServicesOpen(false);
+          }
+          if (resourcesRef.current &&!resourcesRef.current.contains(event.target as Node )) {
+            setResourcesOpen(false);
+          }
+    
+        }
+    
         document.addEventListener("mousedown", handleClickOutside);
         return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
+          document.removeEventListener("mousedown", handleClickOutside);
         };
-    }, []); // Empty dependency array as the refs and handleClickOutside are stable
+      }, [aboutRef, contactRef, eventsRef, servicesRef, resourcesRef]);
 
     const handlePaymentSuccess = (paymentData: google.payments.api.PaymentData) => {
-        // Reset state and show processing indicator
         setPaymentProcessing(true);
         setPaymentFailure(false);
         setPaymentSuccess(false);
         setPaymentError("");
         
-        // Ensure amount is valid before fetching
         if (amount <= 0) {
             setPaymentError("Amount must be greater than zero.");
             setPaymentFailure(true);
@@ -101,11 +109,6 @@ export default function Payments() {
     };
 
     
-    // 3. Razorpay/UPI Logic (Placeholder)
-    // The previous inline <script> and HTML were incorrect in JSX. 
-    // Razorpay integration must be handled by loading the library and running initialization 
-    // within a function that is triggered by a button click, typically using a state variable 
-    // to pass the amount dynamically.
     const handleRazorpayClick = () => {
         const options = {
             key_id: 'YOUR_RAZORPAY_KEY_ID', // Replace with your actual Razorpay key ID
@@ -131,14 +134,96 @@ export default function Payments() {
             
     };
 }
-// Add UPI payment QR Code. 
+
 
     return (
         <>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
                 <div className="bg-image"></div>
                 <header className="app-header">
-                    {/* ... (Your header content) */}
+                    <div className="logo-sharadha">
+                            <img src="/sharadha.webp" alt="SharadhaPeetham logo" />
+                          </div>
+                          <div className='pagetitle'>
+                            <h1>SharadhaPeetham</h1>
+                          </div>
+                          <div className='tabs-container'>
+                            <div className="tab">
+                              <div className="dropdown" ref={aboutRef}>
+                                <button onClick={() => setAboutOpen(!isAboutOpen)} className="tabs">
+                                  About
+                                </button>
+                                {isAboutOpen && (
+                                  <div className="dropdown-menu">
+                                    <a href="/about" className="dropdown-item">Mutt History</a>
+                                    <a href="/about" className="dropdown-item">Details on Sri Dwithiya Chandrasekara Bharathi Adistana</a>
+                                    <a href='/Tkudalu Stala Purana cum appeal- english version_021419.pdf' className="dropdown-item">Sthala Purana</a>
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+                            <div className="tab">
+                              <div className="dropdown" ref={contactRef}>
+                                <button onClick={() => setContactOpen(!isContactOpen)} className="tabs">
+                                  Contact
+                                </button>
+                                {isContactOpen && (
+                                  <div className="dropdown-menu">
+                                    <a href="https://sringeri.net/contact" className="dropdown-item">Phone</a>
+                                    <a href="https://sringeri.net/contact" className="dropdown-item">Email</a>
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+                            <div className="tab">
+                              <div className="dropdown" ref={eventsRef}>
+                                <button onClick={() => setEventsOpen(!isEventsOpen)} className="tabs">
+                                  Events
+                                </button>
+                                {isEventsOpen && (
+                                  <div className="dropdown-menu">
+                                    <Link to="/events/calendar" className="dropdown-item">Calendar </Link>
+                                    <a href="/events" className="dropdown-item">Past Events</a>
+                                    <a href="/events" className="dropdown-item">Upcoming Events</a>
+                                    <a href="/events" className="dropdown-item">Meetings</a>
+                                    <a href="/events" className="dropdown-item">Aksharabhyasa</a>
+                                    <a href="/events" className="dropdown-item">Poojas</a>
+                                    <a href="/events" className="dropdown-item">Navarathri Pooja</a>
+                                    <a href="/events" className="dropdown-item">Shankara Jayanti</a>
+                                    <a href="/events" className="dropdown-item">Shankara Aradhane</a>
+                                    <a href="/events" className="dropdown-item">Bhajans</a>
+                                    <a href="/events" className="dropdown-item">Sri Sri Vidushekara Bharathi's visit to Mutt</a>
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+                            <div className="tab">
+                              <div className="dropdown" ref={servicesRef}>
+                                <button onClick={() => setServicesOpen(!isServicesOpen)} className="tabs">
+                                  Services
+                                </button>
+                                {isServicesOpen && (
+                                  <div className="dropdown-menu">
+                                    <Link to="/services/payments" className="dropdown-item">Online Payment</Link>
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+                            <div className="tab">
+                              <div className="dropdown" ref={resourcesRef}>
+                                <button onClick={() => setResourcesOpen(!isResourcesOpen)} className="tabs">
+                                  Resources
+                                </button>
+                                {isResourcesOpen && (
+                                  <div className="dropdown-menu">
+                                    <a href="https://sringeri.net/contact" className="dropdown-item">LN Sastry Book</a>
+                                    <a href="https://sringeri.net/contact" className="dropdown-item">Sri Sringeri Vignetts</a>
+                    
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+                          </div>
                 </header>
                 <div className="payment-container">
                     <div className="paymment-section">

@@ -435,3 +435,24 @@
   margin-top: 20px;
   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
 }
+
+.moving-text {
+  position: relative;
+  animation: text-move 100s infinite normal;
+  animation-fill-mode: forwards;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 100%;
+  font-display: flex;
+  display: inline-block;
+  font-size: large;
+}
+
+@keyframes text-move {
+  0% {
+    transform: translateX(200vw);
+  }
+  100% {
+    transform: translateX(-200vw);
+  }
+}

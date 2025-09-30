@@ -18,7 +18,7 @@ export default function FullCalendarComponent() {
   const contactRef = useRef<HTMLDivElement>(null);
   const eventsRef = useRef<HTMLDivElement>(null);
   const servicesRef = useRef<HTMLDivElement>(null);
-  //const resourcesRef = useRef<HTMLDivElement>(null);
+  const resourcesRef = useRef<HTMLDivElement>(null);
 
 
   useEffect(() => {
@@ -35,6 +35,9 @@ export default function FullCalendarComponent() {
       }
       if (servicesRef.current && !servicesRef.current.contains(event.target as Node )) {
         setServicesOpen(false);
+      }
+      if (resourcesRef.current &&!resourcesRef.current.contains(event.target as Node )) {
+        setResourcesOpen(false);
       }
 
     }
@@ -117,7 +120,7 @@ export default function FullCalendarComponent() {
           </div>
         </div>
         <div className="tab">
-          <div className="dropdown">
+          <div className="dropdown" ref={resourcesRef}>
             <button onClick={() => setResourcesOpen(!isResourcesOpen)} className="tabs">
               Resources
             </button>
