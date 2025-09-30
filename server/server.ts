@@ -4,7 +4,7 @@ import type { Request, Response } from 'express';
 import cors from 'cors';
 const app = express();
 const port = process.env.PORT || 3001;
-
+const stripePromise = require('stripe')('STRIPE_SECRET_KEY');
 app.use(cors());
 app.use(express.json());
 
