@@ -13,13 +13,20 @@ app.post('/api/process-google-pay', async (req, res) => {
 
   console.log('Received payment token:', paymentToken);
   console.log('Amount:', amount);
-  console.log('Response body', res.json); ;
 
   try {
-    if (paymentToken && amount > 0) {
+    const stripe = await stripePromise;
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: Math.round(amount * 100), // Convert to cents
+      currency: 'usd',
+      payment_method_types: ['card'],
+      payment_method: paymentToken,
+    });
+
+    if (paymentIntent.status === 'succeeded') {
       res.json({ success: true, message: 'Payment processed successfully' });
     } else {
-      res.status(400).json({ success: false, error: 'Invalid payment data' });
+      res.status(400).json({ success: false, error: 'Payment failed' });
     }
   } catch (error) {
     console.error('Payment processing error:', error);
