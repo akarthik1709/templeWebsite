@@ -15,6 +15,10 @@
   animation: logo-slide-across 10s ease-in-out;
 }
 
+html, body {
+  overflow-x: hidden; 
+}
+
 .logo img {
   height: 100%;
   object-fit:contain;
@@ -441,10 +445,9 @@
   animation: text-move 100s infinite normal;
   animation-fill-mode: forwards;
   white-space: nowrap;
-  overflow: hidden;
-  width: 100%;
-  font-display: flex;
-  display: inline-block;
+  width: 200%;
+  display: flex;
+  flex-wrap: wrap;
   font-size: large;
 }
 
