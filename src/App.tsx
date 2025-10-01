@@ -8,11 +8,14 @@ export default function App() {
   const [isEventsOpen, setEventsOpen] = useState(false);
   const [isServicesOpen, setServicesOpen] = useState(false);
   const [isResourcesOpen, setResourcesOpen] = useState(false);
+  const [ismembershipOpen, setmembershipOpen] = useState(false);
   const aboutRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
   const eventsRef = useRef<HTMLDivElement>(null);
   const servicesRef = useRef<HTMLDivElement>(null);
   const resourcesRef = useRef<HTMLDivElement>(null);
+  const membershipRef = useRef<HTMLDivElement>(null);
+
 
 
   useEffect(() => {
@@ -33,14 +36,16 @@ export default function App() {
       if (resourcesRef.current &&!resourcesRef.current.contains(event.target as Node )) {
         setResourcesOpen(false);
       }
-
+      if (membershipRef.current &&!membershipRef.current.contains(event.target as Node )) {
+        setmembershipOpen(false);
+      }
     }
 
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [aboutRef, contactRef, eventsRef, servicesRef, resourcesRef]);
+  }, [aboutRef, contactRef, eventsRef, servicesRef, resourcesRef, membershipRef]);
 
 
   return (
@@ -125,6 +130,18 @@ export default function App() {
                   <a href="https://sringeri.net/contact" className="dropdown-item">LN Sastry Book</a>
                   <a href="https://sringeri.net/contact" className="dropdown-item">Sri Sringeri Vignetts</a>
 
+                </div>
+              )}
+            </div>
+          </div>
+          <div className="tab">
+            <div className="dropdown" ref={membershipRef}>
+              <button  onClick={()=> setmembershipOpen(!ismembershipOpen)} className="tabs">
+                Membership Details
+              </button>
+              {ismembershipOpen && (
+                <div className="dropdown-menu">
+                  <a href="https://forms.gle/JNHy2iGtwjozoPi3A" className="dropdown-item">Membership</a>
                 </div>
               )}
             </div>

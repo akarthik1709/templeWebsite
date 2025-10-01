@@ -17,6 +17,7 @@ export default function Payments() {
     const eventsRef = useRef<HTMLDivElement>(null);
     const servicesRef = useRef<HTMLDivElement>(null);
     const resourcesRef = useRef<HTMLDivElement>(null);
+    const membershipRef = useRef<HTMLDivElement>(null);
 
     const [amount, setAmount] = useState(0);
     const [paymentError, setPaymentError] = useState("");
@@ -28,6 +29,7 @@ export default function Payments() {
     const [isEventsOpen, setEventsOpen] = useState(false);
     const [isServicesOpen, setServicesOpen] = useState(false);
     const [isResourcesOpen, setResourcesOpen] = useState(false);
+    const [ismembershipOpen, setmembershipOpen] = useState(false);
 
     useEffect(() => {
     
@@ -54,7 +56,7 @@ export default function Payments() {
         return () => {
           document.removeEventListener("mousedown", handleClickOutside);
         };
-      }, [aboutRef, contactRef, eventsRef, servicesRef, resourcesRef]);
+      }, [aboutRef, contactRef, eventsRef, servicesRef, resourcesRef, membershipRef]);
 
     const handlePaymentSuccess = (paymentData: google.payments.api.PaymentData) => {
         setPaymentProcessing(true);
@@ -219,6 +221,18 @@ export default function Payments() {
                                     <a href="https://sringeri.net/contact" className="dropdown-item">LN Sastry Book</a>
                                     <a href="https://sringeri.net/contact" className="dropdown-item">Sri Sringeri Vignetts</a>
                     
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+                            <div className="tab">
+                              <div className="dropdown" ref={resourcesRef}>
+                                <button onClick={() => setmembershipOpen(!ismembershipOpen)} className="tabs">
+                                  Membership Details
+                                </button>
+                                {ismembershipOpen && (
+                                  <div className="dropdown-menu">
+                                    <a href="https://sringeri.net/contact" className="dropdown-item">Membership</a>
                                   </div>
                                 )}
                               </div>
