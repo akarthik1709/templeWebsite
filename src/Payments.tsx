@@ -49,6 +49,10 @@ export default function Payments() {
           if (resourcesRef.current &&!resourcesRef.current.contains(event.target as Node )) {
             setResourcesOpen(false);
           }
+          if (membershipRef.current &&!membershipRef.current.contains(event.target as Node )) {
+            setmembershipOpen(false);
+          }
+          
     
         }
     
@@ -226,13 +230,13 @@ export default function Payments() {
                               </div>
                             </div>
                             <div className="tab">
-                              <div className="dropdown" ref={resourcesRef}>
+                              <div className="dropdown" ref={membershipRef}>
                                 <button onClick={() => setmembershipOpen(!ismembershipOpen)} className="tabs">
                                   Membership Details
                                 </button>
                                 {ismembershipOpen && (
                                   <div className="dropdown-menu">
-                                    <a href="https://sringeri.net/contact" className="dropdown-item">Membership</a>
+                                    <a href="https://forms.gle/JNHy2iGtwjozoPi3A" className="dropdown-item">Membership</a>
                                   </div>
                                 )}
                               </div>
