@@ -14,11 +14,13 @@ export default function FullCalendarComponent() {
   const [isEventsOpen, setEventsOpen] = useState(false);
   const [isServicesOpen, setServicesOpen] = useState(false);
   const [isResourcesOpen, setResourcesOpen] = useState(false);
+  const [ismembershipOpen, setmembershipOpen] = useState(false);
   const aboutRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
   const eventsRef = useRef<HTMLDivElement>(null);
   const servicesRef = useRef<HTMLDivElement>(null);
   const resourcesRef = useRef<HTMLDivElement>(null);
+  const membershipRef = useRef<HTMLDivElement>(null);
 
 
   useEffect(() => {
@@ -36,9 +38,6 @@ export default function FullCalendarComponent() {
       if (servicesRef.current && !servicesRef.current.contains(event.target as Node )) {
         setServicesOpen(false);
       }
-      if (resourcesRef.current &&!resourcesRef.current.contains(event.target as Node )) {
-        setResourcesOpen(false);
-      }
 
     }
 
@@ -46,7 +45,7 @@ export default function FullCalendarComponent() {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [aboutRef, contactRef, eventsRef, servicesRef]);
+  }, [aboutRef, contactRef, eventsRef, servicesRef, membershipRef]);
 
 
   return (
@@ -133,6 +132,18 @@ export default function FullCalendarComponent() {
             )}
           </div>
         </div>
+        <div className="tab">
+            <div className="dropdown" ref={membershipRef}>
+              <button  onClick={()=> setmembershipOpen(!ismembershipOpen)} className="tabs">
+                Membership Details
+              </button>
+              {ismembershipOpen && (
+                <div className="dropdown-menu">
+                  <a href="https://forms.gle/JNHy2iGtwjozoPi3A" className="dropdown-item">Membership</a>
+                </div>
+              )}
+            </div>
+          </div>
       </div>
     </header><div className="calendar">
         <h1>Calendar</h1>
