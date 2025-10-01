@@ -39,13 +39,19 @@ export default function FullCalendarComponent() {
         setServicesOpen(false);
       }
 
+      if (resourcesRef.current && !resourcesRef.current.contains(event.target as Node )) {
+        setResourcesOpen(false);
+      }
+      if (membershipRef.current && !membershipRef.current.contains(event.target as Node )) {
+        setmembershipOpen(false);
+      }
     }
 
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [aboutRef, contactRef, eventsRef, servicesRef, membershipRef]);
+  }, [aboutRef, contactRef, eventsRef, servicesRef, resourcesRef, membershipRef]);
 
 
   return (
