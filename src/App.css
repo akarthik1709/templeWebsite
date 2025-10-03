@@ -322,33 +322,31 @@ html, body {
   margin-bottom: 1rem;
   }
 
-  @media (max-width: 100%) {
+  @media (max-width: 900px) {
     .app-header {
-      flex-direction: column;
-      gap: 0.5rem;
+      flex-direction: row;
     }
 
     .tabs-container {
-      align-items: baseline;
-      justify-content: baseline;
-      gap: 2rem;
+      display: inline-flex;
+      gap: 3rem;
       width: 100%;
+      height: 100%;
     }
-  
-    .logo {
-      height: 10em; /* Reduce logo size on smaller screens */
+    
+    .logo-sharadha {
+      height: 4em;
     }
-  
+    
     h1 {
-      font-size: 2.5em; /* Adjust title font size */
+      font-size: 1.0em; /* Adjust title font size */
     }
   
     .pagetitle {
-      justify-content: center;
-      text-align: center;
+      justify-content: left;
+      text-align: left;
       width: 100%;
     }
-
     .carousel-container {
       height: 300px; /* Adjust carousel height for smaller screens */
     }
@@ -360,6 +358,54 @@ html, body {
     .about-text {
       font-size: 1em; /* Adjust font size for better readability */
     }
+
+    .tabs {
+      list-style: none;
+      line-break: auto;
+      border-bottom: 1px solid transparent;
+      font-size: xx-small;
+      transition: border-bottom-color 0.25s;
+    }
+    .tabs:hover {
+      border-bottom-color: #646cff;
+    }
+    
+    .dropdown-menu {
+      display: baseline; /* Hide by default */
+      position: absolute;
+      flex-direction: column;
+      background-color: rgba(255, 160, 17, 0.87);
+      border: 1px solid #1a1a1a;
+      border-radius: 8px;
+      margin-top: 5px;
+    }
+    .dropdown-content {
+      display: flex;
+      flex-direction: column;
+      padding: 0.5em;
+    }
+    .dropdown-menu.show{
+      display:flex;
+    }
+    
+    .dropdown-item {
+      padding: 0.5em;
+      cursor: pointer;
+    }
+    .dropdown {
+      position: absolute;
+    }
+
+    .social-media-icons {
+      width: 100%;
+      height: 100%;
+      gap: 1rem;
+      align-items: center;
+      justify-content: center;
+      display: flex;
+    }
+    
+    
   }
   .audio-container {
     flex-direction: column;
