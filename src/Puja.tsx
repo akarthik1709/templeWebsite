@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom';
+import App from './App';
 
 function PujaList() {
-    const [isAboutOpen, setAboutOpen] = useState(false);
+  const [isAboutOpen, setAboutOpen] = useState(false);
   const [isContactOpen, setContactOpen] = useState(false);
   const [isEventsOpen, setEventsOpen] = useState(false);
   const [isServicesOpen, setServicesOpen] = useState(false);
@@ -49,7 +50,7 @@ function PujaList() {
         <div>
             <header className="app-header">
         <div className="logo-sharadha">
-          <img src="/sharadha.webp" alt="SharadhaPeetham logo" />
+          <img src="/sharadha.webp" alt="SharadhaPeetham logo" onClick={()=> window.location.href="/"}/>
         </div>
         <div className='pagetitle'>
           <h1>SharadhaPeetham</h1>

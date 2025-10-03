@@ -57,7 +57,7 @@ export default function FullCalendarComponent() {
   return (
       <><header className="app-header">
       <div className="logo-sharadha">
-        <img src="/sharadha.webp" alt="SharadhaPeetham logo" />
+        <img src="/sharadha.webp" alt="SharadhaPeetham logo" onClick={()=> window.location.href="/"} />
       </div>
       <div className='pagetitle'>
         <h1>SharadhaPeetham</h1>
