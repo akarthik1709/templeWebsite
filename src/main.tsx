@@ -6,6 +6,7 @@ import About from './About.tsx'
 import FullCalendarComponent from './Calendar'
 import Payments from './Payments'
 import { BrowserRouter as Router, Routes, Route } from'react-router-dom'
+import PujaList from './Puja'
 
 const routes = (
   <Router>
@@ -14,6 +15,7 @@ const routes = (
       <Route path="/about" element={<About />} />
       <Route path="/events/calendar" element={<FullCalendarComponent />} />  
       <Route path="/services/payments" element={<Payments/>} />
+      <Route path="/events/puja" element={<PujaList/>} />
     </Routes>
   </Router>
 
