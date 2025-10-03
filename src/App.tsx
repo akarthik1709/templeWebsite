@@ -98,7 +98,7 @@ export default function App() {
                   <a href="/events" className="dropdown-item">Upcoming Events</a>
                   <a href="/events" className="dropdown-item">Meetings</a>
                   <a href="/events" className="dropdown-item">Aksharabhyasa</a>
-                  <a href="/events/puja" className="dropdown-item">Poojas</a>
+                <Link to="/events/puja" className="dropdown-item">Poojas</Link>
                   <a href="/events" className="dropdown-item">Navarathri Pooja</a>
                   <a href="/events" className="dropdown-item">Shankara Jayanti</a>
                   <a href="/events" className="dropdown-item">Shankara Aradhane</a>
