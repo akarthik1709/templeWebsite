@@ -528,6 +528,7 @@ html, body {
 }
 .puja-table, th, td {
   border: 1px solid gold;
+  padding: 1vw;
 }
 .puja-tbody{
   border: #000000;

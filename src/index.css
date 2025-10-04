@@ -92,7 +92,7 @@ button:focus-visible {
 }
 
 .dropdown-item {
-  padding: 0.5em;
+  padding: 1em;
   cursor: pointer;
 }
 .dropdown {
