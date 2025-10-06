@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import './App.css';
 import CarouselComponent from './Carousel';
 import { Link } from'react-router-dom';
+//import {} from 'react-rbac';
 export default function App() {
   const [isAboutOpen, setAboutOpen] = useState(false);
   const [isContactOpen, setContactOpen] = useState(false);
@@ -53,7 +54,7 @@ export default function App() {
       <div className="bg-image"></div>
       <header className="app-header">
         <div className="logo-sharadha">
-          <img src="/sharadha.webp" alt="SharadhaPeetham logo" onClick= {()=> App}/>
+          <img src="/sharadha.webp" alt="SharadhaPeetham logo" onClick={()=> window.location.href="/"}/>
         </div>
         <div className='pagetitle'>
           <h1>SharadhaPeetham</h1>
@@ -166,7 +167,6 @@ export default function App() {
         </div>
         </div>
         {/*This is the about section below the carousel */}
-
         <div className="about-section">
   <h2 className="about-heading">About SharadhaPeetham</h2>
   <div className="about-container">

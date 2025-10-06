@@ -128,9 +128,9 @@ html, body {
   display: flex;
   gap: 7rem;
   transition: gap 300ms;
-  max-width: 1280px;
-  margin: 0 auto;
-  align-items: stretch;
+  max-width: 100%;
+  margin: auto;
+  align-items: center;
 }
 .logo-sharadha {
   position: relative;
@@ -532,6 +532,19 @@ html, body {
 }
 .puja-tbody{
   border: #000000;
+}
 
+.file-upload-container {
+  display: flex;
+  align-items: baseline;
+  
+}
+.upload-button {
+  display: flex;
 
+}
+.calendar-header {
+  display: block;
+  align-items: end;
+  cursor: pointer;
 }

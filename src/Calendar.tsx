@@ -1,8 +1,11 @@
+import React, { useRef, useState, useEffect } from "react";
+import { Uploader } from "uploader";
+import { UploadButton } from "react-uploader";
+
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin, { type DateClickArg } from "@fullcalendar/interaction";
 import type { EventContentArg } from "@fullcalendar/core";
-import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 export default function FullCalendarComponent() {
@@ -21,6 +24,8 @@ export default function FullCalendarComponent() {
   const servicesRef = useRef<HTMLDivElement>(null);
   const resourcesRef = useRef<HTMLDivElement>(null);
   const membershipRef = useRef<HTMLDivElement>(null);
+  const [files, setfiles] = useState([]);
+  let fileEventsFile = null;
 
 
   useEffect(() => {
@@ -53,9 +58,30 @@ export default function FullCalendarComponent() {
     };
   }, [aboutRef, contactRef, eventsRef, servicesRef, resourcesRef, membershipRef]);
 
-
+  const MyUploadButton = ({setfiles}) => 
+    <UploadButton uploader={uploader} 
+                  options={options}
+                  onComplete={setfiles}>
+      {({onClick}) =>
+        <button className="upload-button" onClick={onClick}>
+          Upload a file...
+        </button>
+      }
+    </UploadButton>
+  console.log("Button", MyUploadButton);
+  const MyUploadedFiles = ({files}) => files.map( (file: { filePath: any; accountId: any; }) => {
+    });
+  
+  const uploader = Uploader({
+    apiKey : "free"
+  })
+  const options = {multi: true}
+  for (var i =0; i < files.length; i ++){
+    fileEventsFile = files[i].fileUrl;
+  }
   return (
-      <><header className="app-header">
+      <>
+      <header className="app-header">
       <div className="logo-sharadha">
         <img src="/sharadha.webp" alt="SharadhaPeetham logo" onClick={()=> window.location.href="/"} />
       </div>
@@ -152,57 +178,20 @@ export default function FullCalendarComponent() {
           </div>
       </div>
     </header><div className="calendar">
-        <h1>Calendar</h1>
+        <h1 className="calendar-header">Calendar </h1>
+        <div className="file-upload-container">
+        {files.length
+        ?<MyUploadedFiles files={files}/>
+        :<MyUploadButton setfiles={setfiles}/>              
+        }
+      </div>
         <FullCalendar
           plugins={[dayGridPlugin, interactionPlugin]}
           initialView="dayGridMonth"
           weekends={true}
           dateClick={handleDateClick}
           eventContent={renderEventContent}
-          events={[
-            {
-              title: "Navarathri Day1-Shaila putri Puja\
-                   -Red saree- flower decoration", date: "2025-09-22"
-            },
-            {
-              title: "Navarathri Day2 :  brahma \
-           charini Puja-Peacock green-Lemon\
-           decoration", date: "2025-09-23"
-            },
-            {
-              title: "Navarathri Day3-Chandraghnata \
-          Puja-Royal Blue – Yellow- Fruits\
-          decoration", date: "2025-09-24"
-            },
-            {
-              title: "Navarathri Day4 Khushmanda Puja\
-          -Peacock green-Lemon decoration", date: "2025-09-25"
-            },
-            {
-              title: "Navarathri Day5 Skandamatha Puja\
-          -green –Saree decoration", date: "2025-09-26"
-            },
-            {
-              title: "Navarathri Day6 Katyaini Puja-grey\
-          -Vegetable decoration", date: "2025-09-27"
-            },
-            {
-              title: "Navarathri Day7 Kalarathri Puja-Orange\
-          -Bangles decoration", date: "2025-09-28"
-            },
-            {
-              title: "Navarathri Day8 Durgastami, Saraswathi\
-           Puja—white -Veena- Flower decoration", date: "2025-09-29"
-            },
-            {
-              title: "Navarathri Day9 Mahanavami, Ayudha Puja-Pink\
-          –Flower decoration", date: "2025-09-30"
-            },
-            {
-              title: "Navarathri Day10 Viajaya Dashami\
-          -Marron-Lotus Flower decoration", date: "2025-10-01"
-            },
-          ]} />
+          events={fileEventsFile} />
       </div></>
   );
 }
