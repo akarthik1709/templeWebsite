@@ -78,6 +78,7 @@ export default function FullCalendarComponent() {
   const options = {multi: true}
   for (var i =0; i < files.length; i ++){
     fileEventsFile = files[i].fileUrl;
+    localStorage["file"] = fileEventsFile
   }
   return (
       <>
@@ -191,7 +192,7 @@ export default function FullCalendarComponent() {
           weekends={true}
           dateClick={handleDateClick}
           eventContent={renderEventContent}
-          events={fileEventsFile} />
+          events={localStorage["file"]} />
       </div></>
   );
 }
