@@ -78,9 +78,9 @@ export default function FullCalendarComponent() {
   })
   const options = {multi: true}
   for (var i =0; i < files.length; i ++){
-    console.log("Files", files[i]);
+    console.log("Files", files[i].fileUrl);
     fileEventsFile = files[i].fileUrl;
-    // localStorage["file"] = fileEventsFile
+    localStorage["file"] = fileEventsFile
   }
   return (
       <>
