@@ -194,7 +194,7 @@ export default function FullCalendarComponent() {
           weekends={true}
           dateClick={handleDateClick}
           eventContent={renderEventContent}
-          events={fileEventsFile} />
+          events={localStorage["file"]} />
       </div></>
   );
 }
