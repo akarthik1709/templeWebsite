@@ -7,6 +7,7 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin, { type DateClickArg } from "@fullcalendar/interaction";
 import type { EventContentArg } from "@fullcalendar/core";
 import { Link } from "react-router-dom";
+import rbac from "react-rbac"
 
 export default function FullCalendarComponent() {
   const handleDateClick = (arg: DateClickArg) => {
@@ -73,12 +74,13 @@ export default function FullCalendarComponent() {
     });
   
   const uploader = Uploader({
-    apiKey : "free"
+    apiKey : "public_G22nhxh8DvUGKZRXRn61b5d2rNaX"
   })
   const options = {multi: true}
   for (var i =0; i < files.length; i ++){
+    console.log("Files", files[i]);
     fileEventsFile = files[i].fileUrl;
-    localStorage["file"] = fileEventsFile
+    // localStorage["file"] = fileEventsFile
   }
   return (
       <>
@@ -192,7 +194,7 @@ export default function FullCalendarComponent() {
           weekends={true}
           dateClick={handleDateClick}
           eventContent={renderEventContent}
-          events={localStorage["file"]} />
+          events={fileEventsFile} />
       </div></>
   );
 }
