@@ -7,7 +7,7 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin, { type DateClickArg } from "@fullcalendar/interaction";
 import type { EventContentArg } from "@fullcalendar/core";
 import { Link } from "react-router-dom";
-import rbac from "react-rbac"
+//import rbac from "react-rbac"
 
 export default function FullCalendarComponent() {
   const handleDateClick = (arg: DateClickArg) => {
